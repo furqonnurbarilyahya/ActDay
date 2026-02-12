@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:actday/home_page.dart';
+import 'package:actday/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
           seedColor: const Color.fromARGB(255, 3, 54, 195),
         ),
       ),
-      home: const HomePage(),
+      home: const HomeScreen(),
     );
   }
 }
