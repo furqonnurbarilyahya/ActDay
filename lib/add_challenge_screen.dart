@@ -1,3 +1,4 @@
+import 'package:actday/history_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -39,7 +40,7 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
               ),
               onChanged: (String value) {
                 setState(() {
-                  _challenge = value;
+                  _description = value;
                 });
               },
             ),
@@ -47,12 +48,15 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
             ElevatedButton(
               child: const Text('Submit'),
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(content: Text('Hello, $_challenge'));
-                  },
+                if (_challenge.isEmpty || _description.isEmpty) return;
+
+                final newItem = HistoryItem(
+                  challenge: _challenge,
+                  description: _description,
+                  status: "Not Completed Yet",
+                  imagePath: "images/image_not_found.jpg"
                 );
+                Navigator.pop(context, newItem);
               },
             ),
           ],

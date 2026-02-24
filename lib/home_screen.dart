@@ -82,7 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: 16),
               OutlinedButton(
-                child: Text("Mark as Completed"),
                 onPressed: currentIndex == null ? null : () {
                   //Aksi ketika diklik
                   if (currentIndex == null) return;
@@ -92,20 +91,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   });
                   showSnackbar();
                 },
+                child: Text("Mark as Completed"),
               ),
               SizedBox(height: 16),
               ElevatedButton(
                 child: Text("Generate New Challenge"),
-                onPressed: () {
+                onPressed: () async {
                   //Aksi ketika diklik
-                  Navigator.push(
+                  final newItem = await Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return AddChallengeScreen();
-                      },
+                    MaterialPageRoute( 
+                    builder: (context) => AddChallengeScreen(),
                     ),
                   );
+                  if (newItem != null) {
+                    setState(() {
+                      historyItemList.add(newItem);
+                      currentIndex = historyItemList.length - 1;
+                    });
+                  }
                 },
               ),
               SizedBox(height: 16),
