@@ -1,3 +1,4 @@
+import 'package:actday/add_challenge_screen.dart';
 import 'package:actday/history_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -78,6 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text("Generate New Challenge"),
                 onPressed: () {
                   //Aksi ketika diklik
+                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return AddChallengeScreen();
+                  }));
                 },
               ),
               SizedBox(height: 16),
