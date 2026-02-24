@@ -10,6 +10,7 @@ class AddChallengeScreen extends StatefulWidget {
 
 class _AddChallengeScreenState extends State<AddChallengeScreen> {
   String _challenge = "";
+  String _description = "";
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,18 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
               decoration: const InputDecoration(
                 hintText: 'Write challenge here....',
                 labelText: 'Your Challenge',
+              ),
+              onChanged: (String value) {
+                setState(() {
+                  _challenge = value;
+                });
+              },
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              decoration: const InputDecoration(
+                hintText: 'Write description here....',
+                labelText: 'Description',
               ),
               onChanged: (String value) {
                 setState(() {

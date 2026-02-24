@@ -59,7 +59,7 @@ var HistoryItemList = [
         "Drink at least 8 glasses of water throughout the day to stay hydrated. "
         "Proper hydration helps maintain body functions, improve concentration, and boost energy. "
         "You can spread the intake evenly from morning until night.",
-    status: "Completed",
+    status: "Not Completed",
     imagePath: "images/drink_water.jpg",
   ),
 ];

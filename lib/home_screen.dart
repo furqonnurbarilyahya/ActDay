@@ -1,4 +1,5 @@
 import 'package:actday/add_challenge_screen.dart';
+import 'package:actday/history_item.dart';
 import 'package:actday/history_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<HistoryItem> historyItemList = HistoryItemList;
+
+  int? currentIndex;
+
   @override
+  void initState() {
+    super.initState();
+    if (historyItemList.isNotEmpty) {
+      currentIndex = HistoryItemList.length - 1;
+    }
+  }
+
   Widget build(BuildContext context) {
+    final currentItem = currentIndex != null ? historyItemList[currentIndex!] : null;
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -50,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Icon(Icons.task_alt_outlined, size: 100),
                         SizedBox(height: 12),
                         Text(
-                          "Take a 30-minute walk",
+                          currentItem?.challenge ?? "No challenge yet",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 35,
@@ -59,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         SizedBox(height: 12),
                         Text(
-                          "Not Completed Yet",
+                          currentItem?.status ?? "",
                           style: TextStyle(fontSize: 16.0),
                         ),
                       ],
@@ -70,8 +83,14 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 16),
               OutlinedButton(
                 child: Text("Mark as Completed"),
-                onPressed: () {
+                onPressed: currentIndex == null ? null : () {
                   //Aksi ketika diklik
+                  if (currentIndex == null) return;
+                  setState(() {
+                    historyItemList[currentIndex!].status = "Completed";
+                    currentIndex = null;
+                  });
+                  showSnackbar();
                 },
               ),
               SizedBox(height: 16),
@@ -79,9 +98,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text("Generate New Challenge"),
                 onPressed: () {
                   //Aksi ketika diklik
-                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return AddChallengeScreen();
-                  }));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return AddChallengeScreen();
+                      },
+                    ),
+                  );
                 },
               ),
               SizedBox(height: 16),
@@ -89,14 +113,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text("View Challenge History >"),
                 onPressed: () {
                   //Aksi ketika diklik
-                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return HistoryScreen();
-                  }));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return HistoryScreen();
+                      },
+                    ),
+                  );
                 },
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+  void showSnackbar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Challenge successfully updated"),
+        duration: Duration(seconds: 2),
       ),
     );
   }
