@@ -1,3 +1,4 @@
+import 'package:actday/detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:actday/history_item.dart';
 
@@ -18,7 +19,7 @@ class HistoryScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return HistoryScreen();
+                    return DetailScreen();
                   },
                 ),
               );
