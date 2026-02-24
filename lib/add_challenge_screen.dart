@@ -19,47 +19,49 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
       appBar: AppBar(title: const Text("Add Challenge")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              decoration: const InputDecoration(
-                hintText: 'Write challenge here....',
-                labelText: 'Your Challenge',
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Write challenge here....',
+                  labelText: 'Your Challenge',
+                ),
+                onChanged: (String value) {
+                  setState(() {
+                    _challenge = value;
+                  });
+                },
               ),
-              onChanged: (String value) {
-                setState(() {
-                  _challenge = value;
-                });
-              },
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              decoration: const InputDecoration(
-                hintText: 'Write description here....',
-                labelText: 'Description',
+              const SizedBox(height: 20),
+              TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Write description here....',
+                  labelText: 'Description',
+                ),
+                onChanged: (String value) {
+                  setState(() {
+                    _description = value;
+                  });
+                },
               ),
-              onChanged: (String value) {
-                setState(() {
-                  _description = value;
-                });
-              },
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              child: const Text('Submit'),
-              onPressed: () {
-                if (_challenge.isEmpty || _description.isEmpty) return;
+              const SizedBox(height: 20),
+              ElevatedButton(
+                child: const Text('Submit'),
+                onPressed: () {
+                  if (_challenge.isEmpty || _description.isEmpty) return;
 
-                final newItem = HistoryItem(
-                  challenge: _challenge,
-                  description: _description,
-                  status: "Not Completed Yet",
-                  imagePath: "images/image_not_found.jpg"
-                );
-                Navigator.pop(context, newItem);
-              },
-            ),
-          ],
+                  final newItem = HistoryItem(
+                    challenge: _challenge,
+                    description: _description,
+                    status: "Not Completed Yet",
+                    imagePath: "images/image_not_found.jpg",
+                  );
+                  Navigator.pop(context, newItem);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
