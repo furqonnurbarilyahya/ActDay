@@ -19,7 +19,7 @@ class HistoryScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return DetailScreen();
+                    return DetailScreen(item: history);
                   },
                 ),
               );
